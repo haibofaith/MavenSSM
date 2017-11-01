@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.BookMapper">
+  <resultMap id="BaseResultMap" type="model.Book">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="chapter_name" jdbcType="VARCHAR" property="chapterName" />
+    <result column="owner" jdbcType="VARCHAR" property="owner" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="model.Book">
+    <result column="chapter_content" jdbcType="LONGVARCHAR" property="chapterContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, chapter_name, owner
+  </sql>
+  <sql id="Blob_Column_List">
+    chapter_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from biquge
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from biquge
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="model.Book">
+    insert into biquge (id, name, chapter_name, 
+      owner, chapter_content)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{chapterName,jdbcType=VARCHAR}, 
+      #{owner,jdbcType=VARCHAR}, #{chapterContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.Book">
+    insert into biquge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="chapterName != null">
+        chapter_name,
+      </if>
+      <if test="owner != null">
+        owner,
+      </if>
+      <if test="chapterContent != null">
+        chapter_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterName != null">
+        #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterContent != null">
+        #{chapterContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.Book">
+    update biquge
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterName != null">
+        chapter_name = #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterContent != null">
+        chapter_content = #{chapterContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="model.Book">
+    update biquge
+    set name = #{name,jdbcType=VARCHAR},
+      chapter_name = #{chapterName,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      chapter_content = #{chapterContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.Book">
+    update biquge
+    set name = #{name,jdbcType=VARCHAR},
+      chapter_name = #{chapterName,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
