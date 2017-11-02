@@ -2,6 +2,8 @@ package service;
 
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -17,5 +19,9 @@ public class BookServiceImpl implements IBookService{
 	public Book getBookById(String bookId) {
 		// TODO Auto-generated method stub
 		return this.bookDao.selectByPrimaryKey(bookId);
+	}
+	
+	public List<Book> getBookByName(String bookName) {
+		return this.bookDao.selectByName(bookName);
 	}
 }

@@ -10,6 +10,13 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="model.Book">
     <result column="chapter_content" jdbcType="LONGVARCHAR" property="chapterContent" />
   </resultMap>
+  <resultMap id="BookList" type="model.Book">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="chapter_name" jdbcType="VARCHAR" property="chapterName" />
+    <result column="owner" jdbcType="VARCHAR" property="owner" />
+    <result column="chapter_content" jdbcType="LONGVARCHAR" property="chapterContent" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, name, chapter_name, owner
   </sql>
@@ -23,6 +30,9 @@
     <include refid="Blob_Column_List" />
     from biquge
     where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BookList">
+  	select id, name, chapter_name, owner , chapter_content from biquge where name =  #{name,jdbcType=VARCHAR};
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from biquge
