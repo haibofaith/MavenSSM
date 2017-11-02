@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import model.Book;
 
 public interface BookMapper {
@@ -10,6 +12,8 @@ public interface BookMapper {
     int insertSelective(Book record);
 
     Book selectByPrimaryKey(String id);
+    
+    List<Book> selectByName(String bookName);
 
     int updateByPrimaryKeySelective(Book record);
 
