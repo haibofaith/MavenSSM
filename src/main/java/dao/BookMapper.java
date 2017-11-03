@@ -12,7 +12,7 @@ public interface BookMapper {
     int insertSelective(Book record);
 
     Book selectByPrimaryKey(String id);
-    
+    //添加搜姓名
     List<Book> selectByName(String bookName);
 
     int updateByPrimaryKeySelective(Book record);

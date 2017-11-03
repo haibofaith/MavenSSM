@@ -10,6 +10,7 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="model.Book">
     <result column="chapter_content" jdbcType="LONGVARCHAR" property="chapterContent" />
   </resultMap>
+  <!--BookList： Book对应Model模块下Book类 -->
   <resultMap id="BookList" type="model.Book">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -31,6 +32,7 @@
     from biquge
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <!-- 添加搜索姓名对应，其中BookList在上面 -->
   <select id="selectByName" parameterType="java.lang.String" resultMap="BookList">
   	select id, name, chapter_name, owner , chapter_content from biquge where name =  #{name,jdbcType=VARCHAR};
   </select>
