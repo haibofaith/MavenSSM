@@ -27,4 +27,15 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<!-- 扫描器 -->
 	<context:component-scan base-package="controller"></context:component-scan>
+	
+	<!-- 注册拦截器 -->
+	<mvc:interceptors>
+		<!-- <mvc:interceptor>
+			配置拦截规则
+			<mvc:mapping path="/*.do"/>	
+			<bean class="interceptor.TestInterceptor"></bean>	
+		</mvc:interceptor>		 -->
+		<bean class="interceptor.TestInterceptor"></bean>	
+		<bean class="interceptor.OtherInterceptor"></bean>	
+	</mvc:interceptors>
 </beans>

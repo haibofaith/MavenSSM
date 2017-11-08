@@ -7,12 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>${msg}</h1><br>
-	<form action="<%=request.getContextPath()%>/save2" method="post">
-		课程名称:<input type="text" name="title"/><br>
-		课程时长:<input type="text" name="duration"/><br>
-		课程难度:<input type="text" name="level"/><br>
-		课程介绍:<input type="text" name="descr"/><br>
+	<form action="j.do" method="post">
+		姓名:<input type="text" name="username"/><br>
+		密码:<input type="text" name="password"/><br>
 		<input type="submit" value="提交">
 	</form>
 </body>
